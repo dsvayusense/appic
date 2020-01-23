@@ -1,0 +1,12 @@
+type: object
+required:
+  - code
+  - message
+properties:
+  timestamp:
+    type: string
+    format: date
+  message:
+    type: string
+  details:
+    type: string

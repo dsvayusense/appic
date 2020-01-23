@@ -1,0 +1,9 @@
+required:
+  - tankId
+properties:
+  co2:
+    type: integer
+    format: int32
+  ph:
+    type: integer
+    format: int32

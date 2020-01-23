@@ -1,0 +1,165 @@
+swagger: '2.0'
+info:
+  version: '0.3.1'
+  title: Tankstore
+  description: A simple Petstore API
+
+basePath: /v1
+schemes:
+  - http
+  - https
+
+produces:
+  - application/json
+
+
+definitions:
+  state:
+    $ref: ./definitions/state/state.yml
+  errorModel:
+    $ref: ./definitions/error/errorModel.yml
+
+paths:
+  /state:
+    get:
+      description: Returns all tanks from the system that the user has access to
+      operationId: findtanks
+      produces:
+        - application/json
+      parameters:
+        - name: page
+          in: query
+          description: tags to filter by
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: maximum number of results to return
+          required: false
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: succsess tank response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/state'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/errorModel'
+        401:
+          description: authorization error
+          schema:
+            $ref: '#/definitions/errorModel'
+        500:
+          description: server error
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      description: Creates a new tank in the store.Duplicates are allowed
+      operationId: addTank
+      produces:
+        - application/json
+      parameters:
+        - name: tank
+          in: body
+          description: tank to add to the store
+          required: true
+          schema:
+            $ref: '#/definitions/state'
+      responses:
+        '200':
+          description: succsess tank response
+          schema:
+            $ref: '#/definitions/state'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/errorModel'
+        401:
+          description: authorization error
+          schema:
+            $ref: '#/definitions/errorModel'
+        500:
+          description: server error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /state/current:
+    get:
+      description: Returns a tank
+      operationId: findCurrentTank
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: succsess tank response
+          schema:
+            $ref: '#/definitions/state'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/errorModel'
+        401:
+          description: authorization error
+          schema:
+            $ref: '#/definitions/errorModel'
+        500:
+          description: server error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /state/max:
+    get:
+      description: Returns a tank with max capacity
+      operationId: findMaxTankCapacity
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: succsess tank response
+          schema:
+            $ref: '#/definitions/state'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/errorModel'
+        401:
+          description: authorization error
+          schema:
+            $ref: '#/definitions/errorModel'
+        500:
+          description: server error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /state/{ph}:
+    put:
+      description: Returns boolean
+      operationId: addWater
+      produces:
+        - application/json
+      parameters:
+        - name: ph
+          in: path
+          description: ID of tank to fetch
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: succsess tank response
+          schema:
+            $ref: '#/definitions/state'
+        400:
+          description: bad request
+          schema:
+            $ref: '#/definitions/errorModel'
+        401:
+          description: authorization error
+          schema:
+            $ref: '#/definitions/errorModel'
+        500:
+          description: server error
+          schema:
+            $ref: '#/definitions/errorModel'
