@@ -25,7 +25,7 @@ public class ChangeStreamDB {
         return flux = reactiveTemplate
         .changeStream("state", ChangeStreamOptions.empty(), State.class);
     }
-
+//add filter
     public void cdcState() {
         Flux<ChangeStreamEvent<State>> stream;
             stream =  reactiveTemplate.changeStream(State.class)
