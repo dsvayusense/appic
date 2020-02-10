@@ -32,5 +32,10 @@ public class StateService {
                         paging.getPageNumber(), paging.getPageSize(), list.size()));
     }
 
+    public void saveState(State state){
+        stateRepository.save(state).subscribe();
+    }
+
+
 
 }

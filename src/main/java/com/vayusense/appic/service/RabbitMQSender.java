@@ -1,9 +1,14 @@
 package com.vayusense.appic.service;
 
 import com.vayusense.appic.dto.StateDto;
+import com.vayusense.appic.entities.State;
+import com.vayusense.appic.persistence.StateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
+import org.modelmapper.ModelMapper;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
@@ -15,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class RabbitMQSender {
 
     private final AmqpTemplate rabbitTemplate;
+    @Autowired
+    StateRepository stateRepository;
 
     @Value("${app1.exchange.name}")
     private String exchange;
@@ -28,10 +35,15 @@ public class RabbitMQSender {
     @Value("${app2.routing.key}")
     private String app2routingkey;
 
-    public void send(StateDto state) {
-        rabbitTemplate.convertAndSend(exchange, routingkey, state);
-        log.debug("Send msg = "+ state);
-        log.info("Send msg = "+ state);
+    public void send(StateDto stateDto) {
+        rabbitTemplate.convertAndSend(exchange, routingkey, stateDto);
+        log.debug("Send msg = "+ stateDto);
+        log.info("Send msg = "+ stateDto);
+       /* ModelMapper mapper = new ModelMapper();
+        State state = mapper.map(stateDto, State.class);
+        stateRepository.save(state).subscribe();*/
+
+
 
     }
 

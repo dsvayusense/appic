@@ -1,56 +1,20 @@
 package com.vayusense.appic.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 public class StateDto {
+
     @JsonProperty("co2")
     private Integer co2 = null;
-
     @JsonProperty("ph")
     private Integer ph = null;
-
-    public StateDto co2(Integer co2) {
-        this.co2 = co2;
-        return this;
-    }
-
-    /**
-     * Get co2
-     * @return co2
-     **/
-    @ApiModelProperty(value = "")
-
-
-    public Integer getCo2() {
-        return co2;
-    }
-
-    public void setCo2(Integer co2) {
-        this.co2 = co2;
-    }
-
-    public StateDto ph(Integer ph) {
-        this.ph = ph;
-        return this;
-    }
-
-    /**
-     * Get ph
-     * @return ph
-     **/
-    @ApiModelProperty(value = "")
-
-
-    public Integer getPh() {
-        return ph;
-    }
-
-    public void setPh(Integer ph) {
-        this.ph = ph;
-    }
-
+    @JsonProperty("details")
+    private Object details;
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -74,7 +38,6 @@ public class StateDto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class State {\n");
-
         sb.append("    co2: ").append(toIndentedString(co2)).append("\n");
         sb.append("    ph: ").append(toIndentedString(ph)).append("\n");
         sb.append("}");

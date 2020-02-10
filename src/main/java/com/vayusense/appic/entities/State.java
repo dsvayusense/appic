@@ -1,10 +1,13 @@
 package com.vayusense.appic.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
+import java.util.Map;
+
 
 @Document(collection = "state" )
 @Data
@@ -23,6 +26,8 @@ public class State {
     private LocalDate endtime;
     @GraphQLQuery(name = "fermentor", description = "A  fermentor state")
     private String fermentor;
+    @JsonProperty("details")
+    private Object details;
 
 
 
