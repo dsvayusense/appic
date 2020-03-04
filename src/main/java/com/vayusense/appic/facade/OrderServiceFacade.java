@@ -14,9 +14,12 @@ import java.net.UnknownHostException;
 @Service
 public interface OrderServiceFacade {
 
-    Mono<PageSupport<State>> findAll(int page, int size, String order);
+    Mono<PageSupport<State>> findAll(Integer page, Integer size, String order);
+    Mono<State> getStateById(String id);
     void send(StateDto stateDto);
     void sendToApp2(StateDto stateDto);
     Flux<DeviceEvent> eventPingRequest() throws UnknownHostException, IOException;
     Mono<DeviceEvent> pingRequestVayumeter() throws UnknownHostException;
+    void saveState(State state);
+    void cdcState();
 }
