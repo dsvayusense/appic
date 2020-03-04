@@ -1,5 +1,6 @@
 package com.vayusense.appic.config;
 
+import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -34,22 +35,24 @@ public class ReactiveConfig extends AbstractReactiveMongoConfiguration {
     //Mongo DB Properties
     private String userName;
     private String password;
-    private String host, database, replicaSet;
+    private String host, database, replicaSet,uri;
     private int port;
 
 
     @Override
     public MongoClient reactiveMongoClient() {
 
-//        MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
+      //  MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
+        ConnectionString connString = new ConnectionString(uri);
         ConnectionPoolSettings connectionPoolSettings = ConnectionPoolSettings.builder().minSize(5).maxSize(10).maxWaitQueueSize(10000).
                 maxWaitTime ( 120, TimeUnit.SECONDS ).build();
-        ClusterSettings clusterSettings = ClusterSettings.builder().serverSelectionTimeout (3,TimeUnit.SECONDS )
-                .hosts(Arrays.asList(new ServerAddress(host,port))).build();
+        ClusterSettings clusterSettings = ClusterSettings.builder().serverSelectionTimeout (3,TimeUnit.SECONDS ).build();
+                //hosts(Arrays.asList(new ServerAddress(host,port))).build();
         MongoClientSettings settings = MongoClientSettings.builder()
                 .clusterSettings(clusterSettings)
                 .connectionPoolSettings (connectionPoolSettings)
-            //    .credentialList(Arrays.asList(credential))
+                .applyConnectionString(connString).retryWrites(true)
+              //  .credentialList(Arrays.asList(credential))
                 .build();
 
         return MongoClients.create(settings);

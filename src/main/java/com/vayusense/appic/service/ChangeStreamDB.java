@@ -1,4 +1,4 @@
-package com.vayusense.appic.persistence.cdc;
+package com.vayusense.appic.service;
 
 import com.vayusense.appic.entities.State;
 import lombok.RequiredArgsConstructor;

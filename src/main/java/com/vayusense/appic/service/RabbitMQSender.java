@@ -39,10 +39,6 @@ public class RabbitMQSender {
         rabbitTemplate.convertAndSend(exchange, routingkey, stateDto);
         log.debug("Send msg = "+ stateDto);
         log.info("Send msg = "+ stateDto);
-       /* ModelMapper mapper = new ModelMapper();
-        State state = mapper.map(stateDto, State.class);
-        stateRepository.save(state).subscribe();*/
-
 
 
     }
