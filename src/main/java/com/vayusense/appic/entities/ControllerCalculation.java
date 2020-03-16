@@ -4,15 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.time.LocalDateTime;
 
-@Document(collection = "machinelearninglog")
+@Document(collection = "ControllerCalculation")
 @Data
 @NoArgsConstructor
-public class MachineLearningLog {
-
+public class ControllerCalculation {
     @Id
     private String id;
     private Integer fermenterSize;
@@ -22,8 +19,12 @@ public class MachineLearningLog {
     private String batchId;
     private LocalDateTime updateDate;
     private int batchTimeInMin;
-    private String message;
-    private String module;
-    private String level;
+    private float fsAction;
+    private float faAction;
+    private float agitationAction;
+    private float dexstroseEstimated;
+    private float ammoniaEstimated;
+    private float ammoniaWanted;
+    private Boolean isAmmoniaUpdate;
 
 }
