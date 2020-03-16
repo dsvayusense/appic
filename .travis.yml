@@ -11,8 +11,8 @@
     "true"
   ],
   "script": [
-    "mvnw clean install",
-    "mvnw test"
+    "mvn clean install",
+    "mvn test"
   ],
   "after_success": [
     "mvn compile jib:build -Djib.to.image=registry.hub.docker.com/vayusense/ic:lastest -Djib.to.auth.username=$USERHUB -Djib.to.auth.password=$PASSHUB"
