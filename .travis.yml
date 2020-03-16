@@ -1,14 +1,10 @@
-sudo: required
 language: java
 jdk: openjdk11
 
-services:
-  - docker
-
+install: true
 script:
-  - ./mvnw clean install
-  - ./mvnw test
-
+  - mvnw clean install
+  - mvnw test
 
 after_success:
-  - ./mvnw compile jib:build -Djib.to.image=registry.hub.docker.com/vayusense/ic:lastest -Djib.to.auth.username=$USERHUB -Djib.to.auth.password=$PASSHUB
+  - mvn compile jib:build -Djib.to.image=registry.hub.docker.com/vayusense/ic:lastest -Djib.to.auth.username=$USERHUB -Djib.to.auth.password=$PASSHUB
