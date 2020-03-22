@@ -47,7 +47,7 @@ public class ReactiveConfig extends AbstractReactiveMongoConfiguration {
         ConnectionPoolSettings connectionPoolSettings = ConnectionPoolSettings.builder().minSize(5).maxSize(10).maxWaitQueueSize(10000).
                 maxWaitTime ( 120, TimeUnit.SECONDS ).build();
         ClusterSettings clusterSettings = ClusterSettings.builder().serverSelectionTimeout (3,TimeUnit.SECONDS ).build();
-                //hosts(Arrays.asList(new ServerAddress(host,port))).build();
+                //.hosts(Arrays.asList(new ServerAddress(host,port))).build();
         MongoClientSettings settings = MongoClientSettings.builder()
                 .clusterSettings(clusterSettings)
                 .connectionPoolSettings (connectionPoolSettings)

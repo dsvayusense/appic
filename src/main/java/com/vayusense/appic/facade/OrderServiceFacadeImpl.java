@@ -83,9 +83,9 @@ public class OrderServiceFacadeImpl implements OrderServiceFacade {
         changeStreamDB.cdcState();
     }
 
-       @PostConstruct
+    /*@PostConstruct
     public void createStatebyStartup()  {
-     /*  State state;
+      State state;
         List<State> arr = new ArrayList<State>();
         for (int i = 0; i<20;i++) {
             state = new State();
@@ -98,7 +98,7 @@ public class OrderServiceFacadeImpl implements OrderServiceFacade {
         }
         log.info("add state");
         stateRepository.saveAll(Mono.just(arr).flatMapMany(Flux::fromIterable)).subscribe();
-        //stateRepository.saveAll(Flux.just(state1,state2,state3,state4)).subscribe();*/
+        //stateRepository.saveAll(Flux.just(state1,state2,state3,state4)).subscribe();
         changeStreamDB.cdcState();
-    }
+    }*/
 }
