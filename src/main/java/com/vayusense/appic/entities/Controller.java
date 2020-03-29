@@ -1,11 +1,12 @@
 package com.vayusense.appic.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class Controller {
 
     private LocalDateTime calcDate;
@@ -17,5 +18,7 @@ public class Controller {
     private float amnEstim;
     private float amnWanted;
     private Boolean isAmnUpdate;
+
+
 
 }

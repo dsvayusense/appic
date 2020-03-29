@@ -1,11 +1,11 @@
 package com.vayusense.appic.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class ControllerDto {
 
@@ -18,4 +18,17 @@ public class ControllerDto {
     private float amnEstim;
     private float amnWanted;
     private Boolean isAmnUpdate;
+
+    public void setAll(LocalDateTime calcDate,float fsAction, float faAction, int batchTimeInMin, float agitationAction, float dcEstim, float amnEstim, float amnWanted, Boolean isAmnUpdate){
+        this.calcDate = calcDate;
+        this.fsAction = fsAction;
+        this.faAction = faAction;
+        this.batchTimeInMin = batchTimeInMin;
+        this.agitationAction = agitationAction;
+        this.dcEstim = dcEstim;
+        this.amnEstim = amnEstim;
+        this.amnWanted = amnWanted;
+        this.isAmnUpdate = isAmnUpdate;
+
+    }
 }

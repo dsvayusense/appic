@@ -1,5 +1,6 @@
 package com.vayusense.appic.web;
 
+import com.vayusense.appic.dto.ActionDto;
 import com.vayusense.appic.dto.DeviceEvent;
 import com.vayusense.appic.dto.ResponseError;
 import com.vayusense.appic.dto.StateDto;
@@ -12,14 +13,15 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 import javax.validation.constraints.*;
 import java.io.IOException;
 
@@ -52,30 +54,21 @@ public class Icontroller {
             @ApiResponse(code = 500, message = "server error", response = ResponseError.class) })
     @GetMapping("/page/state")
     public Mono<ResponseEntity<PageSupport<State>>> findAll(@RequestParam("page") @PositiveOrZero() Integer page ,  @RequestParam("size") @Min(1) Integer size,
-                                                            @RequestParam("order") String order){
+                                                            @RequestParam("order") String order) {
         return facade.findAll(page, size, order).map(statePageSupport -> ResponseEntity.ok(statePageSupport));
     }
 
-    @GetMapping(value ={"/state", "/state/{id}"})
-    public Mono<ResponseEntity<State>> findById(@PathVariable(value = "id",required = false) @NotNull String id){
-        return facade.getStateById(id).map(state -> ResponseEntity.ok(state));
+    @GetMapping(value = {"/state" ,"/state/{id}"})
+    public Mono<ResponseEntity<StateDto>> findById(@PathVariable(value = "id",required = false) @NotNull String id){
+        return facade.findById(id).map(state -> ResponseEntity.ok(state));
     }
 
-    @PostMapping(value = "/state")
-    public Mono<ResponseEntity<StateDto>> producer(@RequestBody @Valid StateDto stateDto){
-        facade.send(stateDto);
-        return Mono.just(ResponseEntity.ok(stateDto));
+    @PostMapping(value = "/state/controller")
+    public Mono<ResponseEntity<ActionDto>> producer(@RequestBody @Valid StateDto stateDto){
+        return facade.saveState(stateDto).map(actionDto -> ResponseEntity.ok(actionDto));
     }
 
 
-    @GetMapping(value = "/producerapp2")
-    public String producerapp2(@RequestParam("co2") Integer co2,@RequestParam("ph") Integer ph) {
-        StateDto state = new StateDto();
-        state.setCo2(co2);
-        state.setPh(ph);
-        facade.sendToApp2(state);
-        return  "Message sent to the RabbitMQ JavaInUse Successfully";
-    }
 
 
 

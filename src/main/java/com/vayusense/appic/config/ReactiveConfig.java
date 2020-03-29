@@ -1,9 +1,6 @@
 package com.vayusense.appic.config;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+import com.mongodb.*;
 import com.mongodb.async.client.MongoClientSettings;
 import com.mongodb.connection.ClusterSettings;
 import com.mongodb.connection.ConnectionPoolSettings;
@@ -16,17 +13,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 //import org.springframework.context.annotation.Profile;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-
 import static com.mongodb.connection.ClusterType.REPLICA_SET;
-//@RefreshScope
+
 @Data
 @Configuration
-//@Profile("dev")
 @EnableReactiveMongoRepositories(basePackages = "com.vayusense.appic.persistence")
 @ConfigurationProperties(prefix = "primary.mongodb")
 public class ReactiveConfig extends AbstractReactiveMongoConfiguration {
@@ -64,10 +62,23 @@ public class ReactiveConfig extends AbstractReactiveMongoConfiguration {
         return database;
     }
 
-   // @RefreshScope
     @Primary
     @Bean(name = "primaryMongoTemplate")
     public ReactiveMongoTemplate getMongoTemplate() {
         return new ReactiveMongoTemplate(reactiveMongoClient() ,getDatabaseName());
     }
+
+    @Bean
+    public MongoDbFactory mongoDbFactory() {
+        return new SimpleMongoDbFactory(new MongoClientURI(uri));
+    }
+
+    @Bean(name = "mongoTemplate")
+    public MongoTemplate mongoTemplate() {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+        return mongoTemplate;
+
+    }
+
+
 }

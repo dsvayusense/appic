@@ -43,9 +43,9 @@ public class RabbitMQSender {
 
     }
 
-    public void sendToApp2(StateDto state) {
+    /*public void sendToApp2(StateDto state) {
         rabbitTemplate.convertAndSend(app2exchange, app2routingkey, state);
         log.debug("Send msg = "+ state);
 
-    }
+    }*/
 }

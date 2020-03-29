@@ -1,5 +1,6 @@
 package com.vayusense.appic.facade;
 
+import com.vayusense.appic.dto.ActionDto;
 import com.vayusense.appic.dto.DeviceEvent;
 import com.vayusense.appic.dto.StateDto;
 import com.vayusense.appic.entities.State;
@@ -15,11 +16,10 @@ import java.net.UnknownHostException;
 public interface OrderServiceFacade {
 
     Mono<PageSupport<State>> findAll(Integer page, Integer size, String order);
-    Mono<State> getStateById(String id);
-    void send(StateDto stateDto);
-    void sendToApp2(StateDto stateDto);
+    Mono<StateDto>  findById(String id);
+    Mono<ActionDto> saveState(StateDto stateDto);
+    //void sendToApp2(StateDto stateDto);
     Flux<DeviceEvent> eventPingRequest() throws UnknownHostException, IOException;
     Mono<DeviceEvent> pingRequestVayumeter() throws UnknownHostException;
-    void saveState(State state);
     void cdcState();
 }
