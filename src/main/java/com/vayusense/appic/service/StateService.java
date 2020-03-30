@@ -4,7 +4,6 @@ import com.vayusense.appic.dto.ActionDto;
 import com.vayusense.appic.dto.ControllerDto;
 import com.vayusense.appic.dto.MonitoredDto;
 import com.vayusense.appic.dto.StateDto;
-import com.vayusense.appic.entities.Controller;
 import com.vayusense.appic.errorhandler.BusinessException;
 import com.vayusense.appic.errorhandler.ResourceNotFoundException;
 import com.vayusense.appic.persistence.paging.PageSupport;
@@ -62,6 +61,10 @@ public class StateService {
             return new StateDto(statem.getBatchId(), statem.getFermenterVolInL(), statem.getBatchStartDate(),
                     statem.getFermenterName(),statem.getBatchAgeInMin(), statem.getBatchSerialNumber(),monitoreDto, controllerMap);
                 });
+    }
+
+    public Mono<State> save(State state){
+        return  stateRepository.save(state).onErrorMap(e -> new BusinessException(e.getMessage())).log();
     }
 
 

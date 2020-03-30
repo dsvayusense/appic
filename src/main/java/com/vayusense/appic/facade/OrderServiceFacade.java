@@ -21,5 +21,5 @@ public interface OrderServiceFacade {
     //void sendToApp2(StateDto stateDto);
     Flux<DeviceEvent> eventPingRequest() throws UnknownHostException, IOException;
     Mono<DeviceEvent> pingRequestVayumeter() throws UnknownHostException;
-    void cdcState();
+    Mono<State> save(State state);
 }

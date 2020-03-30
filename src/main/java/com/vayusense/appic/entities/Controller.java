@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class Controller {
 
     private LocalDateTime calcDate;
-    private float fsAction;
-    private float faAction;
+    private Double fsAction;
+    private Double faAction;
     private int batchTimeInMin;
-    private float agitationAction;
-    private float dcEstim;
-    private float amnEstim;
-    private float amnWanted;
+    private Double agitationAction;
+    private Double dcEstim;
+    private Double amnEstim;
+    private Double amnWanted;
     private Boolean isAmnUpdate;
 
 

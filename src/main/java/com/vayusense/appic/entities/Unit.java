@@ -3,7 +3,6 @@ package com.vayusense.appic.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -16,8 +15,6 @@ public class Unit {
 
     @Id
     private String id;
-    @Indexed(name = "batch_id",unique = true)
-    private String batchId;
     private Integer fermenterVolInL;
     private LocalDateTime batchStartDate;
     private String temperature;
