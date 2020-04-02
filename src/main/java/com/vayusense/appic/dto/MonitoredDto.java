@@ -32,6 +32,8 @@ public class MonitoredDto {
     private int kanamTimeInMin;
     private Double pcv;
     private int pcvTimeInMin;
+    private Double dextroseConcent;
+    private Double dextroseTimeInMin;
 
 
 

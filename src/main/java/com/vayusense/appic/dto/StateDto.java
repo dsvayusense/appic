@@ -1,5 +1,6 @@
 package com.vayusense.appic.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vayusense.appic.errorhandler.Adult;
 import io.swagger.annotations.ApiModel;
@@ -7,6 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
@@ -26,6 +29,7 @@ public class StateDto {
     @PositiveOrZero(message = "fermenterVolInL cannot be less than {0} ")
     private Integer fermenterVolInL;
     @JsonProperty("batchStartDate")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull(message = "batchStartDate is a required field")
     @PastOrPresent(message = "batchStartDate should be in the past or today")
     private LocalDateTime batchStartDate;

@@ -42,7 +42,7 @@ public class RestIControllerTests {
     public void saveById() {
         StateDto state = new StateDto();
         state.setBatchStartDate(LocalDateTime.now());
-        state.setBatchId("120Prod");
+        state.setBatchId("420Prod");
         state.setBatchAgeInMin(1);
         state.setFermenterVolInL(1);
         state.setFermenterName("Prod");
@@ -62,7 +62,7 @@ public class RestIControllerTests {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.batchId").isEqualTo("120Prod")
+                .jsonPath("$.batchId").isEqualTo("420Prod")
                 .jsonPath("$.fermenterVolInL").isEqualTo(1)
                 .jsonPath("$.fermenterName").isEqualTo("Prod")
                 .jsonPath("$.batchSerialNumber").isNotEmpty();
